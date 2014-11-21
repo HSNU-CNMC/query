@@ -1,0 +1,8 @@
+@import 'layout';
+
+.splash {
+    display: none;
+    &[ng-cloak] {
+        display: block;
+    }
+}

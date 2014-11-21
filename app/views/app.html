@@ -1,0 +1,17 @@
+<div id="layout" ng-class="menuOpen ? 'active' : ''">
+	<a ng-click="menuOpen = !menuOpen" class="menu-link" ng-class="menuOpen ? 'active' : ''">
+		<span></span>
+	</a>
+	<div id="menu">
+		<div class="pure-menu pure-menu-open" ng-class="menuOpen ? 'active' : ''">
+			<a class="pure-menu-heading" ui-sref="root">師大附中線上查詢</a>
+
+			<ul>
+				<li><a ui-sref="root">Home</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="main">
+		<div ui-view></div>
+	</div>
+</div>
