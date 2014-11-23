@@ -6,9 +6,10 @@ angular.module('hq').config(function($stateProvider){
     });
 });
 
-angular.module('hq').controller('ApplicationController', function($localStorage, $state, $scope){
-    $scope.session = null;
-    $scope.menuOpen = true;
+angular.module('hq').controller('ApplicationController', function(Session, $localStorage, $state, $scope){
+    $scope.username = null;
+    $scope.menuOpen = false;
+
     if(!$localStorage.session){
         $state.go('root.login');
     }

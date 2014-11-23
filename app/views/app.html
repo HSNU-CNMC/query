@@ -7,7 +7,7 @@
 			<a class="pure-menu-heading" ui-sref="root">師大附中線上查詢</a>
 
 			<ul>
-				<li><a ui-sref="root">Home</a></li>
+				<li ng-if="!username"><a ui-sref="root.login">登入</a></li>
 			</ul>
 		</div>
 	</div>

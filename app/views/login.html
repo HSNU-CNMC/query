@@ -1,6 +1,29 @@
 <div class="header">
-	<h1>Title</h1>
+	<h1>歡迎使用師大附中線上查詢系統</h1>
 </div>
 <div class="content">
-	<p>test</p>
+	<h2>請先登入</h2>
+	<form class="pure-form pure-form-aligned" ng-submit="login(credentials)">
+		<fieldset>
+			<div class="pure-control-group">
+				<label for="username">學號：</label>
+				<input id="username" ng-model="credentials.username" type="text" placeholder="請輸入學號...">
+			</div>
+			<div class="pure-control-group">
+				<label for="password">身分證字號：</label>
+				<input id="password" ng-model="credentials.password" type="password" placeholder="請輸入身分證字號...">
+			</div>
+			<div class="pure-control-group">
+				<label for="vcode">驗證碼：</label>
+				<input id="vcode" ng-model="credentials.vcode" type="text" placeholder="請輸入下方的數字...">
+			</div>
+			<div class="pure-control-group">
+				<label>&nbsp;</label>
+				<img ng-src="{{ vcodeUrl }}">
+			</div>
+			<div class="pure-controls">
+				<button type="submit" class="pure-button pure-button-primary">確定登入</button>
+			</div>
+		</fieldset>
+	</form>
 </div>

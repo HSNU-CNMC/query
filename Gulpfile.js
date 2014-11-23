@@ -66,9 +66,6 @@ gulp.task('styles', function(){
 });
 
 gulp.task('assets', function(){
-	gulp.src(['./bower_components/bootstrap/fonts/*'])
-		.pipe(gulp.dest('./build/fonts'));
-	
 	gulp.src(['./bower_components/font-awesome/fonts/*'])
 		.pipe(gulp.dest('./build/fonts'));
 
