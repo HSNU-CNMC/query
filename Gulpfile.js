@@ -79,14 +79,14 @@ gulp.task('views', function(){
 });
 
 gulp.task('watch', ['default'], function(){
-	watch(['app/**/*.js'], function(files){
-		gulp.start('scripts');
+	watch(['app/**/*.js'], function(files, cb){
+		gulp.start('scripts', cb);
 	});
-	watch(['app/**/*.scss'], function(files){
-		gulp.start('styles');
+	watch(['app/**/*.scss'], function(files, cb){
+		gulp.start('styles', cb);
 	});
-	watch(['app/**/*.html'], function(files){
-		gulp.start('views');
+	watch(['app/**/*.html'], function(files, cb){
+		gulp.start('views', cb);
 	});
 });
 
