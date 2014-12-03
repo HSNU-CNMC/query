@@ -8,6 +8,7 @@ angular.module('hq').config(function($stateProvider){
 
 angular.module('hq').controller('LoginController', function(Session, $rootScope, $scope, $http){
 	$scope.vcodeUrl = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+	$scope.error = false;
 
 	$http.get('/proxy/vcode').then(function(resp){
 		var data = resp.data;
@@ -24,9 +25,9 @@ angular.module('hq').controller('LoginController', function(Session, $rootScope,
 		}).then(function(resp){
 			var data = resp.data;
 			if(data.status === 'ok'){
-				console.log('ok!');
+				$rootScope.$broadcast('login', data.username);
 			} else {
-				console.log(data);
+				$scope.error = true;
 			}
 		});
 	};

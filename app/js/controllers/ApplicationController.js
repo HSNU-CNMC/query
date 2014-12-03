@@ -6,11 +6,49 @@ angular.module('hq').config(function($stateProvider){
     });
 });
 
-angular.module('hq').controller('ApplicationController', function(Session, $localStorage, $state, $scope){
+angular.module('hq').controller('ApplicationController', function(Session, $http, $localStorage, $state, $scope, $rootScope, $sce){
     $scope.username = null;
     $scope.menuOpen = false;
+    $scope.list = [];
+    $scope.tableHtml = '';
+    $scope.tableName = '';
+    $scope.loading = false;
+
+    $scope.$on('login', function(evt, username){
+        $scope.username = username;
+        $localStorage.session = Session.cookie;
+        $state.go('root.home');
+        $http.get('/proxy/list?session=' + Session.cookie).then(function(resp){
+            $scope.list = resp.data.list;
+            console.log(resp.data);
+        });
+    });
+
+    $scope.query = function(index){
+        $scope.tableName = $scope.tableHtml = '';
+        $scope.loading = true;
+        $http.post('/proxy/query', {
+            session: Session.cookie,
+            action: $scope.list[index].action
+        }).then(function(resp){
+            $scope.loading = false;
+            $scope.tableName = $scope.list[index].name;
+            $scope.tableHtml = $sce.trustAsHtml(resp.data.result);
+        });
+    };
+
+    $scope.logout = function(){
+        Session.destroy();
+        $scope.username = null;
+        $state.go('root.login');
+    };
 
     if(!$localStorage.session){
         $state.go('root.login');
+    } else {
+        Session.create($localStorage.session);
+        $http.get('/proxy/profile?session=' + Session.cookie).then(function(resp){
+            $rootScope.$broadcast('login', resp.data.username);
+        });
     }
 });

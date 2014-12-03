@@ -1,6 +1,28 @@
 <div class="header">
-	<h1>Home</h1>
+	<h1>{{ tableName }}</h1>
 </div>
 <div class="content">
-	<p>test</p>
+	<p ng-if="!tableHtml">請點選左方項目進行查詢...</p>
+	<div ng-if="!!tableHtml" ng-bind-html="tableHtml">
+	</div>
+</div>
+<div ng-if="loading" class="spinner">
+	<div class="spinner-container container1">
+		<div class="circle1"></div>
+		<div class="circle2"></div>
+		<div class="circle3"></div>
+		<div class="circle4"></div>
+	</div>
+	<div class="spinner-container container2">
+		<div class="circle1"></div>
+		<div class="circle2"></div>
+		<div class="circle3"></div>
+		<div class="circle4"></div>
+	</div>
+	<div class="spinner-container container3">
+		<div class="circle1"></div>
+		<div class="circle2"></div>
+		<div class="circle3"></div>
+		<div class="circle4"></div>
+	</div>
 </div>

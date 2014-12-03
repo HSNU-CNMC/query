@@ -4,10 +4,15 @@
 	</a>
 	<div id="menu">
 		<div class="pure-menu pure-menu-open" ng-class="menuOpen ? 'active' : ''">
-			<a class="pure-menu-heading" ui-sref="root">師大附中線上查詢</a>
+			<a class="pure-menu-heading" href="javascript:void(0)">師大附中線上查詢</a>
 
-			<ul>
-				<li ng-if="!username"><a ui-sref="root.login">登入</a></li>
+			<ul ng-if="!username">
+				<li><a ui-sref="root.login">登入</a></li>
+			</ul>
+			<ul ng-if="!!username">
+				<li><a href="javascript:void(0)">您好，{{ username }}！</a></li>
+				<li ng-repeat="item in list"><a href="javascript:void(0)" ng-click="query($index)">{{ item.name }}</a></li>
+				<li><a href="javascript:void(0)" ng-click="logout()">登出</a></li>
 			</ul>
 		</div>
 	</div>

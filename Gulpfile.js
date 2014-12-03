@@ -26,6 +26,7 @@ var config = {
 		css: [
 			'bower_components/pure/pure-min.css',
 			'vendor/loading-bar.css',
+			'vendor/spinner.css',
 			'bower_components/ngDialog/css/ngDialog.css',
 			'bower_components/ngDialog/css/ngDialog-theme-default.css',
 		]
