@@ -95,8 +95,10 @@ app.post('/proxy/query', function(req, res){
 		res.send({ status: 'error', message: 'invalid request' });
 		return;
 	}
+	console.log(req.body.action);
 	var hres = request('http://grades.hs.ntnu.edu.tw/online/selection_student/' + req.body.action, {
 		method: 'GET',
+		timeout: 15000,
 		headers: {
 			'Cookie': req.body.session
 		}
