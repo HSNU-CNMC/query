@@ -1,5 +1,6 @@
 angular.module('hq', [
 	'ui.router',
+	'angular-loading-bar',
 	'ngStorage',
 	'ngDialog'
 ]);
