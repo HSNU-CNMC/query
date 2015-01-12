@@ -20,7 +20,6 @@ angular.module('hq').controller('ApplicationController', function(Session, $http
         $state.go('root.home');
         $http.get('/proxy/list?session=' + Session.cookie).then(function(resp){
             $scope.list = resp.data.list;
-            console.log(resp.data);
         });
     });
 
@@ -48,7 +47,8 @@ angular.module('hq').controller('ApplicationController', function(Session, $http
     } else {
         Session.create($localStorage.session);
         $http.get('/proxy/profile?session=' + Session.cookie).then(function(resp){
-            $rootScope.$broadcast('login', resp.data.username);
+            if(resp.data.status === 'error') $scope.logout();
+            else $rootScope.$broadcast('login', resp.data.username);
         });
     }
 });

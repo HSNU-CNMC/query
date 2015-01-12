@@ -63,6 +63,10 @@ app.get('/proxy/profile', function(req, res){
 		}
 	});
 	var html = codepage.utils.decode(950, new Buffer(hres.data));
+	if(html.indexOf('Close.asp') != -1){
+		res.send({ status: 'error', message: 'login timeout' });
+		return;
+	}
 	var $ = cheerio.load(html);
 	var name = $('td[valign=middle]', '#Ch1').text().split(' ')[1];
 	res.send({ status: 'ok', username: name });
