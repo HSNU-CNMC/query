@@ -51,6 +51,8 @@ gulp.task('scripts', function(){
 		.pipe(angularFilesort())
 		.pipe(ngAnnotate())
 		.pipe(concat('app.min.js'))
+		.pipe(uglify())
+		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./build/js'));
 });
 
