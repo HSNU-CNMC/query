@@ -44,7 +44,7 @@ app.post('/proxy/login', function(req, res){
 		});
 		var html = codepage.utils.decode(950, new Buffer(hres.data));
 		var $ = cheerio.load(html);
-		var name = $('td[valign=middle]', '#Ch1').text().split(' ')[1];
+		var name = $('a[class=Chap]').first().text().split(' ')[1];
 		res.send({ status: 'ok', username: name });
 	} else {
 		res.send({ status: 'error' });
@@ -68,7 +68,7 @@ app.get('/proxy/profile', function(req, res){
 		return;
 	}
 	var $ = cheerio.load(html);
-	var name = $('td[valign=middle]', '#Ch1').text().split(' ')[1];
+	var name = $('a[class=Chap]').first().text().split(' ')[1];
 	res.send({ status: 'ok', username: name });
 });
 
@@ -99,7 +99,6 @@ app.post('/proxy/query', function(req, res){
 		res.send({ status: 'error', message: 'invalid request' });
 		return;
 	}
-	console.log(req.body.action);
 	var hres = request('http://grades.hs.ntnu.edu.tw/online/selection_student/' + req.body.action, {
 		method: 'GET',
 		timeout: 15000,
