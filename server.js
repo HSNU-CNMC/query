@@ -35,7 +35,7 @@ app.post('/proxy/login', function(req, res){
 	});
 	var html = hres.data.toString();
 	if(html.indexOf('frames.asp') != -1){
-		var hres = request('http://grades.hs.ntnu.edu.tw/online/student/left.asp', {
+		var hres = request('http://grades.hs.ntnu.edu.tw/online/student/selection_look_over_data.asp?look_over=right_below', {
 			method: 'GET',
 			encoding: null,
 			headers: {
@@ -44,7 +44,7 @@ app.post('/proxy/login', function(req, res){
 		});
 		var html = codepage.utils.decode(950, new Buffer(hres.data));
 		var $ = cheerio.load(html);
-		var name = $('a[class=Chap]').first().text().split(' ')[1];
+		var name = $('#authirty1 > td').eq(2).text();
 		res.send({ status: 'ok', username: name });
 	} else {
 		res.send({ status: 'error' });
@@ -56,19 +56,19 @@ app.get('/proxy/profile', function(req, res){
 		res.send({ status: 'error', message: 'invalid request' });
 		return;
 	}
-	var hres = request('http://grades.hs.ntnu.edu.tw/online/student/left.asp', {
+	var hres = request('http://grades.hs.ntnu.edu.tw/online/student/selection_look_over_data.asp?look_over=right_below', {
 		method: 'GET',
 		headers: {
 			'Cookie': req.query.session
 		}
 	});
 	var html = codepage.utils.decode(950, new Buffer(hres.data));
-	if(html.indexOf('Close.asp') != -1){
+	if(html.indexOf('伺服器錯誤') != -1){
 		res.send({ status: 'error', message: 'login timeout' });
 		return;
 	}
 	var $ = cheerio.load(html);
-	var name = $('a[class=Chap]').first().text().split(' ')[1];
+	var name = $('#authirty1 > td').eq(2).text();
 	res.send({ status: 'ok', username: name });
 });
 
