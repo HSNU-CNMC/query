@@ -43,7 +43,7 @@ angular.module('hq').controller('ApplicationController', function(Session, $http
     };
 
     if(!$localStorage.session){
-        $state.go('root.login');
+        $state.go('root.login', {}, { location: 'replace' });
     } else {
         Session.create($localStorage.session);
         $http.get('/proxy/profile?session=' + Session.cookie).then(function(resp){
