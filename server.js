@@ -109,7 +109,8 @@ app.post('/proxy/query', function(req, res){
 	var html = codepage.utils.decode(950, new Buffer(hres.data));
 	var $ = cheerio.load(html);
 	$('input').remove();
-	res.send({ status: 'ok', result: $('body').html() });
+	var ret = $('body').html();
+	res.send({ status: 'ok', result: ret.replace('&#x5734;', '均') });
 });
 
 app.use(function(req, res){
